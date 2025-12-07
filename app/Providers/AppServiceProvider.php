@@ -2,23 +2,16 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Quiz_result;
 
-class AppServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
+    public function boot()
     {
-        //
+            $totalPoints = (int) Quiz_result::sum('score') * 10;
+            view()->share('totalPoints', $totalPoints);
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
-    }
 }

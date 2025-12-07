@@ -10,7 +10,11 @@ class Question extends Model
 
     public function options()
     {
-        return $this->hasMany(Option::class);
+        return $this->hasMany(Option::class, 'question_id');
+    }
+
+    public function correctOption()
+    {
+        return $this->hasOne(Option::class, 'question_id')->where('is_correct', 1);
     }
 }
-

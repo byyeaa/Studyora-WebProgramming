@@ -12,4 +12,14 @@ class Quiz_result extends Model
     {
         return $this->belongsTo(Quiz::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Quiz_user_answer::class, 'quiz_result_id');
+    }
 }

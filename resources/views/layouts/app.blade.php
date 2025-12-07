@@ -8,6 +8,8 @@
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <style>
         body {
             background: #f5f7fa;
@@ -24,6 +26,12 @@
             border-bottom: 1px solid #e6e6e6;
             background: #ffffff;
         }
+
+        .active-nav {
+            color: #0b1846 !important;
+            font-weight: 600;
+        }
+
     </style>
 </head>
 <body>
@@ -45,11 +53,28 @@
 
             {{-- Menu --}}
             <ul class="navbar-nav ms-3">
-                <li class="nav-item"><a class="nav-link px-3" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="{{ route('quiz.index') }}">Quiz</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#">Progress</a></li>
-                <li class="nav-item"><a class="nav-link fw-semibold px-3" href="#">Leaderboard</a></li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('home') ? 'active-nav' : '' }}"
+                    href="{{ route('home') }}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('quiz.index') ? 'active-nav' : '' }}"
+                    href="{{ route('quiz.index') }}">Quiz</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('progress') ? 'active-nav' : '' }}"
+                    href="{{ route('progress') }}">Progress</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('leaderboard') ? 'active-nav' : '' }}"
+                    href="{{ route('leaderboard') }}">Leaderboard</a>
+                </li>
             </ul>
+
+
 
             {{-- Search Bar --}}
             <form class="d-flex mx-auto position-relative" style="width:300px;">
@@ -60,11 +85,11 @@
             </form>
 
             {{-- Points --}}
-            <div class="d-flex align-items-center">
-                <div class="px-3 py-1 rounded-pill text-white me-3" 
-                     style="background:#0b1846; font-size:14px;">
-                    3200 Points <i class="bi bi-coin"></i>
-                </div>
+            <div class="px-3 py-1 rounded-pill text-white me-3" 
+                style="background:#0b1846; font-size:14px;">
+                {{ $totalPoints }} Points <i class="bi bi-coin"></i>
+            </div>
+
 
                 {{-- Avatar --}}
                 <div class="rounded-circle" 
