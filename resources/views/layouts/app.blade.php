@@ -42,7 +42,7 @@
 
         {{-- Logo --}}
         <a class="navbar-brand fw-bold" href="#">
-            <img src="/logo.png" alt="logo" height="28">
+            <img src="{{ asset('images/Logo.png') }}" alt="logo" height="70">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
@@ -75,26 +75,39 @@
             </ul>
 
 
-
-            {{-- Search Bar --}}
-            <form class="d-flex mx-auto position-relative" style="width:300px;">
+            <!-- searchbar -->
+            <form class="d-flex mx-auto position-relative" style="width:450px;" method="GET" action="{{ route('quiz.index') }}">
                 <i class="bi bi-search position-absolute" 
-                   style="left:10px; top:50%; transform:translateY(-50%); color:#777;"></i>
+                style="left:10px; top:50%; transform:translateY(-50%); color:#777;"></i>
+
                 <input class="form-control rounded-pill ps-5" 
-                       type="text" placeholder="search..." />
+                    type="text" 
+                    name="search"
+                    value="{{ $search ?? '' }}"
+                    placeholder="search..." />
             </form>
 
-            {{-- Points --}}
-            <div class="px-3 py-1 rounded-pill text-white me-3" 
+            <!-- points -->
+            <div class="px-3 py-1 rounded-pill text-white me-3 d-flex align-items-center gap-1"
                 style="background:#0b1846; font-size:14px;">
-                {{ $totalPoints }} Points <i class="bi bi-coin"></i>
+                {{ $totalPoints }} Points 
+                <i class="bi bi-star-fill" style="color:#FFD700;"></i>
             </div>
 
 
-                {{-- Avatar --}}
-                <div class="rounded-circle" 
-                     style="width:35px; height:35px; background:#eee;"></div>
-            </div>
+
+           <a href="{{ route('profile.index') }}">
+                <img 
+                    src="{{ !empty(session('user')) && !empty(session('user')->photo)
+                            ? asset('profiles/' . session('user')->photo)
+                            : asset('images/default-avatar.png') }}"
+                    class="rounded-circle"
+                    style="width:40px; height:40px; object-fit:cover;"
+                    alt="profile"
+                >
+            </a>
+
+
 
         </div>
 

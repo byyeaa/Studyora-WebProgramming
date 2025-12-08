@@ -11,87 +11,38 @@
     {{-- Icons --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    {{-- Google Fonts Inter --}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
-            background: #ffffff;
             font-family: 'Inter', sans-serif;
-        }
-
-        /* NAVBAR */
-        .navbar-landing {
-            background: #d9e8ff; 
-            height: 70px;
-            border-bottom: 1px solid #e6e6e6;
-        }
-
-        .nav-link {
-            color: #0b1846 !important;
-            font-weight: 500;
-            margin-right: 20px;
-        }
-
-        .nav-link:hover {
-            color: #27408b !important;
-        }
-
-        .search-bar {
-            width: 250px;
-            border-radius: 50px;
-            padding-left: 35px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #555;
-        }
-
-        .btn-login {
-            background: none;
-            border: none;
-            font-weight: 600;
-            color: #0b1846;
-            margin-right: 15px;
-        }
-
-        .btn-signup {
-            border: none;
-            background: #0b1846;
-            color: white;
-            padding: 6px 20px;
-            border-radius: 7px;
-            font-weight: 600;
         }
     </style>
 </head>
-
-<body>
+<body style="background-color: #ffffff;">
 
     {{-- NAVBAR --}}
-    <nav class="navbar navbar-expand-lg navbar-landing px-4">
-    <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
+        <div class="container-fluid">
 
-        <a class="navbar-brand fw-bold" href="#">
-            <img src="/logo-studyora.png" height="28"> 
-        </a>
+            {{-- Brand --}}
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+                <img src="{{ asset('images/Logo.png') }}" height="70" class="me-2">
+            </a>
 
-        <div class="collapse navbar-collapse show">
-
-            {{-- AUTH BUTTONS --}}
+            {{-- Auth Buttons --}}
             <div class="ms-auto d-flex align-items-center">
-                <button class="btn-login">Login</button>
-                <button class="btn-signup">Sign Up</button>
+                <button class="btn btn-link fw-semibold text-dark me-3" style="text-decoration: none; color: #0b1846;">Login</button>
+                <button class="btn fw-semibold text-white" style="background-color: #0b1846; border-radius: 7px; padding: 6px 20px;">Sign Up</button>
             </div>
-
         </div>
-    </div>
-</nav>
-
+    </nav>
 
     {{-- MAIN CONTENT --}}
-    @yield('content')
+    <div class="w-100">
+        @yield('content')
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

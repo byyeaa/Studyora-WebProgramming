@@ -14,7 +14,7 @@ class QuizSeeder extends Seeder
         $quiz = Quiz::create([
         'title' => 'Zaman Praaksara di Indonesia',
         'description' => 'Kuis sejarah Indonesia kuno',
-        'thumbnail' => 'praaksara.jpg',
+        'thumbnail' => 'praaksara.jpeg',
     ]);
 
     $q1 = $quiz->questions()->create([
@@ -132,9 +132,9 @@ class QuizSeeder extends Seeder
 
         //quiz 2
        $quiz = Quiz::create([
-            'title' => 'PPKN',
+            'title' => 'Sejarah Indonesia',
             'description' => 'Kuis sejarah Indonesia 1945',
-            'thumbnail' => 'praaksara.jpg',
+            'thumbnail' => 'sejarah.jpg',
         ]);
 
         // q1
@@ -259,9 +259,24 @@ class QuizSeeder extends Seeder
 
 
         $quiz = Quiz::create([
-            'title' => 'Zaman Praaksara di Indonesia',
-            'description' => 'Kuis sejarah Indonesia kuno',
-            'thumbnail' => 'praaksara.jpg',
+            'title' => 'Persamaan Linear Dua Variabel',
+            'description' => 'Matematika Wajib',
+            'thumbnail' => 'math.jpeg',
         ]);
+
+        $quiz = Quiz::create([
+            'title' => 'Hukum Gerak Newton',
+            'description' => 'Fisika',
+            'thumbnail' => 'physics.jpeg',
+        ]);
+
+        $quiz = Quiz::create([
+            'title' => 'Termokimia',
+            'description' => 'Kimia',
+            'thumbnail' => 'chemistry.jpg',
+        ]);
+
+
+
     }
 }

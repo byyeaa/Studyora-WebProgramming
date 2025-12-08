@@ -3,17 +3,13 @@
 @section('content')
 <div class="container mt-4">
 
-    <!-- Title -->
     <h4 class="fw-bold mb-4">Progress</h4>
 
-    <!-- Progress Card -->
     <div class="card mb-4 shadow-sm">
         <div class="card-body">
 
-            <!-- Level -->
             <h6 class="fw-bold">Level {{ $level ?? 10 }}</h6>
 
-            <!-- Streak Section -->
             <div class="border rounded p-3 mt-3">
                 <div class="d-flex justify-content-between mb-2">
                     <span class="fw-semibold">Streak</span>
@@ -27,9 +23,8 @@
 
                     @foreach ($days as $i => $day)
                         <div class="text-center">
-                            <div class="rounded-circle d-flex justify-content-center align-items-center 
-                                {{ in_array($i, $streakIndexes ?? [0,1,2,3]) ? 'bg-success text-white' : 'bg-light' }}"
-                                style="width: 32px; height: 32px;">
+                            <div class="rounded-circle d-flex justify-content-center align-items-center text-white"
+                                style="width: 32px; height: 32px; background-color: {{ in_array($i, $streakIndexes ?? [0,1,2,3]) ? 'rgba(69, 159, 53, 1)' : '#e9ecef' }};">
                                 @if(in_array($i, $streakIndexes ?? [0,1,2,3]))
                                     <i class="bi bi-check-lg"></i>
                                 @endif
@@ -40,7 +35,6 @@
                 </div>
             </div>
 
-            <!-- Completed Activities -->
             <div class="mt-4 d-flex justify-content-around text-center">
                 <div>
                     <h5 class="fw-bold">{{ $totalQuizzes ?? 0 }}</h5>
@@ -58,7 +52,6 @@
         </div>
     </div>
 
-    <!-- Continue Learning -->
     <h6 class="fw-bold mb-3">Lanjutkan Belajar</h6>
 
     <div class="row">
@@ -72,12 +65,13 @@
 
                         <div class="progress mt-2" style="height: 6px;">
                             <div class="progress-bar" role="progressbar"
-                                style="width: {{ $quiz->progress }}%;">
+                                style="width: {{ $quiz->progress }}%; background-color:rgba(69, 159, 53, 1);">
                             </div>
                         </div>
 
                         <a href="{{ route('quiz.start', $quiz->id) }}" 
-                           class="btn btn-primary btn-sm mt-3">
+                           class="btn btn-sm mt-3 text-white"
+                           style="background-color:#1A2A4F;">
                             Continue
                         </a>
 

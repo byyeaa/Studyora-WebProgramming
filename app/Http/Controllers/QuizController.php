@@ -24,32 +24,38 @@ class QuizController extends Controller
     // 2. RECOMMENDED QUIZ (kalau kosong juga aman)
     $recommendedQuizzes = Quiz::inRandomOrder()->take(2)->get();
 
-    // 3. SUBJECTS (hardcoded biar pasti aman)
-    $subjects = [
-        (object)[ 'name' => 'Matematika', 'slug' => 'matematika', 'color' => '#F9E2AE' ],
-        (object)[ 'name' => 'IPA', 'slug' => 'ipa', 'color' => '#BEE1FF' ],
-        (object)[ 'name' => 'IPS', 'slug' => 'ips', 'color' => '#FFD5E5' ],
-    ];
-
-    // 4. LAST QUIZ PROGRESS (AMAN WALAUPUN NULL)
+    // 3. LAST QUIZ PROGRESS (AMAN WALAUPUN NULL)
     $lastQuizProgress = Quiz_result::with('quiz')
         ->latest()
         ->first();
 
+    $totalQuizzes = Quiz_result::count();
+    $level = floor($totalQuizzes / 10) + 1;
+
     return view('home', [
         'user' => $user,
         'recommendedQuizzes' => $recommendedQuizzes,
-        'subjects' => $subjects,
-        'lastQuizProgress' => $lastQuizProgress
+        'lastQuizProgress' => $lastQuizProgress,
+        'level' => $level
     ]);
 }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $quizzes = Quiz::all();
-        return view('quiz-list', compact('quizzes'));
+        $search = $request->search;
+
+        $quizzes = Quiz::when($search, function ($query, $search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+            });
+        })->get();
+
+        return view('quiz-list', compact('quizzes', 'search'));
     }
+
+
 
     // ==============================
     // START QUIZ

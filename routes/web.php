@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('landing');
@@ -35,5 +36,8 @@ Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leade
 //progress
 Route::get('/progress', [QuizController::class, 'progress'])->name('progress');
 
+//profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 

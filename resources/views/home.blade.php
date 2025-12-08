@@ -1,63 +1,103 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-4">
+<div class="container-fluid px-4 pt-3 pb-4">
 
-    {{-- Halo User --}}
-    <h4 class="fw-bold mb-3">Halo, {{ $user->name ?? 'Username' }}!</h4>
-
-    {{-- Card Lanjutkan Mengerjakan --}}
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="row g-0">
-            <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
-                <img src="/images/illustration-progress.png" class="img-fluid" alt="Progress">
-            </div>
-            <div class="col-md-8 p-4 d-flex flex-column justify-content-center">
-                <h6 class="fw-semibold">Lanjutkan Mengerjakan</h6>
-
-                <p class="mb-3 text-secondary">
-                    {{ $lastQuizProgress->quiz->title ?? 'Belum ada progress' }}
-                </p>
-
-                <a href="{{ isset($lastQuizProgress) ? route('quiz.start', $lastQuizProgress->quiz->id) : '#' }}"
-                   class="btn btn-primary btn-sm {{ isset($lastQuizProgress) ? '' : 'disabled' }}">
-                   {{ isset($lastQuizProgress) ? 'Lanjutkan' : 'Belum Ada' }}
-                </a>
-            </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1">Hai, {{ $user->name ?? 'Username' }}</h4>
+            <p class="text-muted mb-0">Siap lanjut hari ini?</p>
         </div>
     </div>
 
-    {{-- Rekomendasi Kuis --}}
-    <h5 class="fw-semibold mb-3">Rekomendasi Kuis Untukmu</h5>
+    <div class="row g-4">
 
-    <div class="row g-3 mb-5">
-        @foreach ($recommendedQuizzes as $quiz)
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0">
-                <img src="{{ $quiz->thumbnail ?? '/images/default-thumb.jpg' }}" class="card-img-top" alt="thumbnail">
-                <div class="card-body">
-                    <h6 class="fw-semibold">{{ $quiz->title }}</h6>
-                    <a href="{{ route('quiz.start', $quiz->id) }}" class="btn btn-dark btn-sm mt-2">Mulai Sekarang</a>
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm mb-4 rounded-5">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 py-4 px-4">
+
+                    <div>
+                        <small class="text-muted d-block mb-1">Lanjutkan Mengerjakan</small>
+                        <span class="fw-semibold fs-6">
+                            {{ $lastQuizProgress->quiz->title ?? 'Belum ada progress' }}
+                        </span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a href="{{ $lastQuizProgress ? route('quiz.start', $lastQuizProgress->quiz->id) : '#' }}"
+                           class="btn btn-sm rounded-pill px-4 text-white {{ $lastQuizProgress ? '' : 'disabled' }}"
+                           style="background-color:#1A2A4F;">
+                            {{ $lastQuizProgress ? 'Lanjutkan' : 'Belum Ada' }}
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </div>
-        @endforeach
-    </div>
 
-    {{-- Pilih Mata Pelajaran --}}
-    <h5 class="fw-semibold mb-3">Pilih Mata Pelajaran</h5>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-semibold mb-0">Rekomendasi Untukmu</h6>
+            </div>
 
-    <div class="row g-3">
-        @foreach($subjects as $subject)
-        <div class="col-md-4 col-6">
-            <a href="#" class="text-decoration-none">
-                <div class="p-4 rounded text-center shadow-sm"
-                     style="background-color: {{ $subject->color }};">
-                    <span class="fw-semibold text-dark">{{ $subject->name }}</span>
+            <div class="row g-4">
+                @forelse ($recommendedQuizzes as $quiz)
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm rounded-5 overflow-hidden h-100">
+
+                        <img src="{{ asset('images/' . $quiz->thumbnail) }}"
+                             class="w-100"
+                             style="height: 140px; object-fit: cover;"
+                             alt="thumbnail">
+
+                        <div class="card-body p-4 d-flex flex-column">
+                            <h6 class="fw-semibold mb-3">
+                                {{ $quiz->title }}
+                            </h6>
+
+                            <a href="{{ route('quiz.start', $quiz->id) }}"
+                               class="btn btn-sm w-100 text-white rounded-pill mt-auto"
+                               style="background-color:#1A2A4F;">
+                                Mulai
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
-            </a>
+                @empty
+                    <p class="text-muted">Belum ada rekomendasi kuis.</p>
+                @endforelse
+            </div>
+
         </div>
-        @endforeach
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm rounded-5 mb-4">
+                <div class="card-body p-4">
+                    <h6 class="fw-semibold mb-3">Info Akun</h6>
+
+                    <p class="mb-1 small text-muted">Nama</p>
+                    <p class="fw-semibold mb-3">{{ $user->name ?? 'Username' }}</p>
+
+                    <p class="mb-1 small text-muted">Level</p>
+                    <span class="px-4 py-1 rounded-pill small fw-semibold"
+                          style="border:1.5px solid #1A2A4F; color:#1A2A4F;">
+                        {{ $level ?? 0 }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-5">
+                <div class="card-body p-4">
+                    <h6 class="fw-semibold mb-2">Tips Hari Ini</h6>
+                    <p class="small text-muted mb-0">
+                        Kerjakan kuis sedikit demi sedikit agar tidak menumpuk.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
