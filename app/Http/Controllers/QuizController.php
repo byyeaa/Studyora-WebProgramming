@@ -15,7 +15,11 @@ class QuizController extends Controller
     {
         $user = auth()->user() ?? (object)['name' => 'User'];
         $recommendedQuizzes = Quiz::inRandomOrder()->take(2)->get();
-        $lastQuizProgress = Quiz_result::with('quiz')->latest()->first();
+        // $lastQuizProgress = Quiz_result::with('quiz')->latest()->first();
+        $lastQuizProgress = Quiz_result::with('quiz')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->first();
 
         $totalQuizzes = Quiz_result::count();
         $level = floor($totalQuizzes / 10) + 1;
@@ -78,6 +82,16 @@ class QuizController extends Controller
         $questionIds = session('quiz_questions_'.$quizId);
         $currentIndex = session('quiz_current_'.$quizId, 0);
 
+        if (!isset($questionIds[$currentIndex])) {
+        // Kalau sudah selesai semua soal, redirect ke result
+        $resultId = session('quiz_result_'.$quizId);
+        if ($resultId) {
+            return redirect()->route('quiz.result', $resultId);
+        }
+        // Kalau belum ada result, redirect ke quiz list
+        return redirect()->route('quiz.index')->with('error', 'Quiz sudah selesai atau session expired.');
+        }
+
         $questionId = $questionIds[$currentIndex];
         $question = Question::with('options')->findOrFail($questionId);
 
@@ -90,7 +104,7 @@ class QuizController extends Controller
         $resultId = session('quiz_result_'.$quizId);
         if (!$resultId) {
             $result = Quiz_result::create([
-                'user_id' => null,
+                'user_id' => auth()->id(),
                 'quiz_id' => $quizId,
                 'score' => 0
             ]);

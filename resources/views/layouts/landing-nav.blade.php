@@ -33,8 +33,8 @@
 
             {{-- Auth Buttons --}}
             <div class="ms-auto d-flex align-items-center">
-                <button class="btn btn-link fw-semibold text-dark me-3" style="text-decoration: none; color: #0b1846;">Login</button>
-                <button class="btn fw-semibold text-white" style="background-color: #0b1846; border-radius: 7px; padding: 6px 20px;">Sign Up</button>
+                <a href="{{ route('login') }}" class="btn btn-link fw-semibold text-dark me-3" style="text-decoration: none; color: #0b1846;">Login</a>
+                <a href="{{ route('register') }}" class="btn fw-semibold text-white" style="background-color: #0b1846; border-radius: 7px; padding: 6px 20px;">Sign Up</a>
             </div>
         </div>
     </nav>

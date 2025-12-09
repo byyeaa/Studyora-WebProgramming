@@ -1,8 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-
-<div class="container py-4">
+<x-app-layout>
+    <div class="container py-4">
 
     <h3 class="fw-bold mb-4">Detail Hasil Kuis</h3>
 
@@ -64,4 +61,4 @@
 
 </div>
 
-@endsection
+</x-app-layout>

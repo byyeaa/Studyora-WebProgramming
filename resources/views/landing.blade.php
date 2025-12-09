@@ -9,7 +9,7 @@
         <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
             <h1 class="fw-bold" style="font-size: 36px; color:#0b1846;">Kuasai Materi, Cara Seru.</h1>
             <p style="color:#0b1846;">Kuis interaktif, penjelasan ringkas, progres belajar yang terlihat</p>
-            <a href="#" class="btn btn-dark fw-bold" style="border-radius:10px; padding:10px 25px;">Mulai Sekarang</a>
+            <a href="{{ route('login') }}" class="btn btn-dark fw-bold" style="border-radius:10px; padding:10px 25px;">Mulai Sekarang</a>
         </div>
 
         {{-- Image --}}

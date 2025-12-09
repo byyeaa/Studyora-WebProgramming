@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index()
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
     {
-        $user = session('user');
-
-        return view('profile', compact('user'));
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
         ]);
 
-        $sessionUser = session('user');
+        $user = $request->user();
 
-        if (!$sessionUser) {
-            return back()->with('error', 'User belum login');
-        }
+        Auth::logout();
 
-        $user = User::find($sessionUser->id);
+        $user->delete();
 
-        if (!$user) {
-            return back()->with('error', 'User tidak ditemukan');
-        }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        $user->name = $request->name;
-
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
-
-            $path = public_path('profiles');
-            if (!File::exists($path)) {
-                File::makeDirectory($path, 0777, true);
-            }
-
-            $file->move($path, $filename);
-
-            if ($user->photo && File::exists(public_path('profiles/'.$user->photo))) {
-                File::delete(public_path('profiles/'.$user->photo));
-            }
-
-            $user->photo = $filename;
-        }
-
-        $user->save();
-
-        session(['user' => $user]);
-
-        return back()->with('success', 'Profile berhasil diperbarui');
+        return Redirect::to('/');
     }
 }
