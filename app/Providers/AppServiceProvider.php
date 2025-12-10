@@ -10,8 +10,9 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-            $totalPoints = (int) Quiz_result::sum('score') * 10;
-            view()->share('totalPoints', $totalPoints);
+            // $totalPoints = (int) Quiz_result::sum('score') * 10;
+            // view()->share('totalPoints', $totalPoints);
+            View::share('totalScore', 0);
     }
 
 }
