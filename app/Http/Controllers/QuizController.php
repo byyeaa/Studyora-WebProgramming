@@ -32,6 +32,21 @@ class QuizController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        
+        // Cari quiz berdasarkan nama/judul
+        $quizzes = Quiz::where('title', 'LIKE', "%{$search}%")
+                       ->orWhere('description', 'LIKE', "%{$search}%")
+                       ->get();
+        
+        return view('quiz.search', [
+            'quizzes' => $quizzes,
+            'search' => $search
+        ]);
+    }
+
     public function index(Request $request)
     {
         $search = $request->search;
@@ -89,7 +104,7 @@ class QuizController extends Controller
             return redirect()->route('quiz.result', $resultId);
         }
         // Kalau belum ada result, redirect ke quiz list
-        return redirect()->route('quiz.index')->with('error', 'Quiz sudah selesai atau session expired.');
+        return redirect()->route('quiz.index')->with('error', 'Kuis sudah selesai atau session expired.');
         }
 
         $questionId = $questionIds[$currentIndex];

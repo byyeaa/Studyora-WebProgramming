@@ -67,3 +67,6 @@ Route::get('/progress', [QuizController::class, 'progress'])->name('progress')->
 //Route::get('/profile', [ProfileController::class, 'index'])->name('profile.edit'); //before: profile.index
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+//cari kuis
+Route::get('/quiz/search', [QuizController::class, 'search'])->name('quiz.search');

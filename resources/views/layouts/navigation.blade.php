@@ -47,36 +47,11 @@
                 </li>
             </ul>
 
-            <!-- {{-- User Dropdown (Right side) --}}
-            <div class="ms-auto d-flex align-items-center">
-                <div class="dropdown">
-                    <button class="btn btn-link text-decoration-none dropdown-toggle fw-semibold d-flex align-items-center" 
-                            type="button" 
-                            id="userDropdown" 
-                            data-bs-toggle="dropdown" 
-                            aria-expanded="false"
-                            style="color: #0b1846;">
-                        <i class="bi bi-person-circle me-2 fs-5"></i>
-                        {{ Auth::user()->name }}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                <i class="bi bi-person me-2"></i>Profile
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item text-danger">
-                                    <i class="bi bi-box-arrow-right me-2"></i>Logout
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
+            @auth
+            <div class="points-display" style="margin-left: 20px; color: #0b1846; font-weight: bold;">
+                <span>🏆 Total Points: {{ auth()->user()->total_points }}</span>
+            </div>
+            @endauth
              <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

@@ -46,4 +46,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Hitung total poin user dari semua quiz yang sudah dikerjakan
+     */
+    public function getTotalPointsAttribute()
+    {
+        return $this->quizResults()->sum('score') * 10;
+    }
+
+    /**
+     * Relasi ke Quiz_result
+     */
+    public function quizResults()
+    {
+        return $this->hasMany(Quiz_result::class);
+    }
 }

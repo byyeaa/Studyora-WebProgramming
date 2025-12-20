@@ -1,10 +1,10 @@
 
 <x-app-layout>
-    <div class="container-fluid px-4 pt-3 pb-4">
+    <div class="container-fluid px-4 py-4">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="fw-bold mb-1">Hai, {{ $user->name ?? 'Username' }}</h4>
+                <h2 class="fw-bold mb-1">Hai, {{ $user->name ?? 'Username' }}</h2>
                 <p class="text-muted mb-0">Siap lanjut hari ini?</p>
             </div>
         </div>

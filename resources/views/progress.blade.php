@@ -1,8 +1,7 @@
-
 <x-app-layout>
-    <div class="container mt-4">
+    <div class="container p-4">
 
-        <h4 class="fw-bold mb-4">Progress</h4>
+        <h1 class="fw-bold mb-4">Progres</h1>
 
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
