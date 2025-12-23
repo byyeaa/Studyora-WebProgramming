@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Providers;
-
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Quiz_result;
+use Illuminate\Support\Facades\URL;
 
-class ViewServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function register()
     {
-            // $totalPoints = (int) Quiz_result::sum('score') * 10;
-            // view()->share('totalPoints', $totalPoints);
-            View::share('totalScore', 0);
+        //
     }
 
+    public function boot()
+    {
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
+    }
 }
