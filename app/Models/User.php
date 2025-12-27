@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'content-type' => 'application/json',
         ])->post('https://api.brevo.com/v3/smtp/email', [
         'sender' => [
-            'email' => 'studyora258@gmail.com',
+            'email' => 'no-reply@brevo.com',
             'name'  => 'Studyora',
         ],
             'to' => [
