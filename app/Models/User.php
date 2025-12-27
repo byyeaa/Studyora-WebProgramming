@@ -44,14 +44,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ]
         );
 
-        Http::withHeaders([
-            'api-key' => env('BREVO_API_KEY'),
-            'Content-Type' => 'application/json',
+       $response = Http::withHeaders([
+        'api-key' => env('BREVO_API_KEY'),
+        'accept' => 'application/json',
+        'content-type' => 'application/json',
         ])->post('https://api.brevo.com/v3/smtp/email', [
-            'sender' => [
-                'email' => 'studyora258@gmail.com',
-                'name'  => 'Studyora',
-            ],
+        'sender' => [
+            'email' => 'studyora258@gmail.com',
+            'name'  => 'Studyora',
+        ],
             'to' => [
                 [
                     'email' => $this->email,
