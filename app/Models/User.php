@@ -2,43 +2,29 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -47,17 +33,56 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    /**
-     * Hitung total poin user dari semua quiz yang sudah dikerjakan
-     */
+    public function sendEmailVerificationNotification()
+    {
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            Carbon::now()->addMinutes(60),
+            [
+                'id' => $this->getKey(),
+                'hash' => sha1($this->getEmailForVerification()),
+            ]
+        );
+
+        Http::withHeaders([
+            'api-key' => env('BREVO_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.brevo.com/v3/smtp/email', [
+            'sender' => [
+                'email' => 'studyora258@gmail.com',
+                'name'  => 'Studyora',
+            ],
+            'to' => [
+                [
+                    'email' => $this->email,
+                    'name'  => $this->name,
+                ],
+            ],
+            'subject' => 'Verifikasi Email Akun Studyora',
+            'htmlContent' => "
+                <p>Halo <b>{$this->name}</b>,</p>
+                <p>Silakan klik tombol berikut untuk verifikasi email kamu:</p>
+                <p>
+                    <a href='{$verificationUrl}'
+                       style='display:inline-block;
+                              padding:12px 20px;
+                              background:#4f46e5;
+                              color:#ffffff;
+                              text-decoration:none;
+                              border-radius:6px'>
+                        Verifikasi Email
+                    </a>
+                </p>
+                <p>Jika bukan kamu, abaikan email ini.</p>
+            ",
+        ]);
+    }
+
     public function getTotalPointsAttribute()
     {
         return $this->quizResults()->sum('score') * 10;
     }
 
-    /**
-     * Relasi ke Quiz_result
-     */
     public function quizResults()
     {
         return $this->hasMany(Quiz_result::class);
