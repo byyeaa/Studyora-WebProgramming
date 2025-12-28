@@ -1,113 +1,44 @@
-{{-- NAVBAR --}}
 <nav class="navbar navbar-expand-lg navbar-light px-4"
-    style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px; z-index: 1000;">
-    
+    style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6;">
+
     <div class="container-fluid">
 
-        {{-- LOGO --}}
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
-            <img src="{{ asset('images/Logo.png') }}" height="60" class="me-2" alt="Studyora Logo">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('images/Logo.png') }}" class="navbar-brand-img" alt="Studyora">
         </a>
 
-        {{-- BURGER BUTTON --}}
-        <button class="navbar-toggler"
-            type="button"
+        <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+            data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- COLLAPSIBLE MENU --}}
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse bg-white rounded shadow-sm mt-2 mt-lg-0 px-3 px-lg-0"
+             id="navbarNav">
 
-            {{-- LEFT MENU --}}
-            <ul class="navbar-nav me-auto ms-4">
+            <ul class="navbar-nav me-auto ms-lg-4">
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}"
-                        href="{{ route('home') }}">
-                        Home
-                    </a>
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('quiz.*') ? 'active' : '' }}"
-                        href="{{ route('quiz.index') }}">
-                        Quiz
-                    </a>
+                    <a class="nav-link" href="{{ route('quiz.index') }}">Quiz</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('progress.*') ? 'active' : '' }}"
-                        href="{{ route('progress') }}">
-                        Progress
-                    </a>
+                    <a class="nav-link" href="{{ route('progress') }}">Progress</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}"
-                        href="{{ route('leaderboard') }}">
-                        Leaderboard
-                    </a>
+                    <a class="nav-link" href="{{ route('leaderboard') }}">Leaderboard</a>
                 </li>
             </ul>
+
         </div>
 
-        {{-- RIGHT SIDE (OUTSIDE COLLAPSE) --}}
         @auth
         <div class="d-flex align-items-center gap-3">
-
-            {{-- POINTS --}}
-            <div class="fw-bold" style="color: #0b1846;">
-                🏆 {{ auth()->user()->total_points }}
-            </div>
-
-            {{-- USER DROPDOWN (JETSTREAM SAFE) --}}
-            <x-dropdown align="right" width="48">
-                <x-slot name="trigger">
-                    <button type="button"
-                        class="btn btn-link text-decoration-none fw-semibold d-flex align-items-center"
-                        style="color: #0b1846;">
-                        {{ Auth::user()->name }}
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-                    <x-dropdown-link :href="route('profile.edit')">
-                        Profile
-                    </x-dropdown-link>
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-dropdown-link
-                            :href="route('logout')"
-                            onclick="event.preventDefault(); this.closest('form').submit();">
-                            Log Out
-                        </x-dropdown-link>
-                    </form>
-                </x-slot>
-            </x-dropdown>
-
+            🏆 {{ auth()->user()->total_points }}
+            <x-dropdown>...</x-dropdown>
         </div>
         @endauth
 
     </div>
 </nav>
-
-{{-- STYLES --}}
-<style>
-    .navbar-nav .nav-link {
-        color: #0b1846;
-    }
-
-    .navbar-nav .nav-link.active {
-        font-weight: 700;
-        border-bottom: 2px solid #0b1846;
-    }
-
-    .navbar-nav .nav-link:hover {
-        opacity: 0.85;
-    }
-</style>
