@@ -9,11 +9,17 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+// Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return redirect()->route('home');
-    })->name('dashboard');
+//     Route::get('/dashboard', function () {
+//         return redirect()->route('home');
+//     })->name('dashboard');
+
+    Route::middleware(['auth'])->group(function () {
+    
+        Route::get('/dashboard', function () {
+            return redirect()->route('home');
+        })->name('dashboard');
 
     Route::get('/home', [QuizController::class, 'home'])->name('home');
 
