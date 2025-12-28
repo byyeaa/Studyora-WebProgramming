@@ -1,100 +1,108 @@
 {{-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg px-4"
-     style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6;">
-
+<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
     <div class="container-fluid">
 
-        {{-- LOGO --}}
-        <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-            <img src="{{ asset('images/Logo.png') }}"
-                 alt="Studyora Logo"
-                 style="height:40px;">
+        {{-- Brand/Logo --}}
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
+            <img src="{{ asset('images/Logo.png') }}" height="70" width="170" class="me-2" alt="Studyora Logo">
         </a>
 
-        {{-- BURGER --}}
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+        {{-- Hamburger Button (Mobile) --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- MENU --}}
+        {{-- Navigation Links & User Menu --}}
         <div class="collapse navbar-collapse" id="navbarNav">
-
-            {{-- LEFT MENU --}}
-            <ul class="navbar-nav me-auto ms-lg-4">
+            {{-- Menu Navigation (Left side after logo) --}}
+            <ul class="navbar-nav me-auto ms-4">
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}"
-                       href="{{ route('home') }}">
+                    <a class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}" 
+                       href="{{ route('home') }}" 
+                       style="color: #0b1846;">
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('quiz.*') ? 'active' : '' }}"
-                       href="{{ route('quiz.index') }}">
+                    <a class="nav-link fw-semibold {{ request()->routeIs('quiz.*') ? 'active' : '' }}" 
+                       href="{{ route('quiz.index') }}" 
+                       style="color: #0b1846;">
                         Quiz
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('progress.*') ? 'active' : '' }}"
-                       href="{{ route('progress') }}">
+                    <a class="nav-link fw-semibold {{ request()->routeIs('progress.*') ? 'active' : '' }}" 
+                       href="{{ route('progress') }}" 
+                       style="color: #0b1846;">
                         Progress
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}"
-                       href="{{ route('leaderboard') }}">
+                    <a class="nav-link fw-semibold {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}" 
+                       href="{{ route('leaderboard') }}" 
+                       style="color: #0b1846;">
                         Leaderboard
                     </a>
                 </li>
             </ul>
 
-            {{-- RIGHT USER --}}
             @auth
-            <div class="d-flex align-items-center gap-3">
-                <span class="fw-bold">🏆 {{ auth()->user()->total_points }}</span>
-
-                <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle fw-semibold text-decoration-none"
-                            data-bs-toggle="dropdown">
-                        {{ Auth::user()->name }}
-                    </button>
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="dropdown-item text-danger">
-                                    Logout
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+            <div class="points-display" style="margin-left: 20px; color: #0b1846; font-weight: bold;">
+                <span>🏆 Total Points: {{ auth()->user()->total_points }}</span>
             </div>
             @endauth
+             <!-- Settings Dropdown -->
+            <div class="d-flex align-items-center ms-3">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="btn btn-link text-decoration-none dropdown-toggle fw-semibold d-flex align-items-center"
+                            style="color: #0b1846;">
+                            <div>{{ Auth::user()->name }}</div>
 
-            @guest
-                <a href="{{ route('login') }}" class="btn btn-outline-dark btn-sm">
-                    Login
-                </a>
-            @endguest
+                            <!-- <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div> -->
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.edit')" style="color: #0b1846;">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();" style="color: #0b1846;">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+            </div>
+
+            
 
         </div>
+
     </div>
 </nav>
 
 <style>
-.navbar-nav .nav-link.active {
-    font-weight: 700;
-    border-bottom: 2px solid #0b1846;
-}
+    /* Active menu styling */
+    .navbar-nav .nav-link.active {
+        font-weight: 700;
+        border-bottom: 2px solid #0b1846;
+    }
+    
+    /* Hover effect */
+    .navbar-nav .nav-link:hover {
+        opacity: 0.8;
+    }
 </style>
