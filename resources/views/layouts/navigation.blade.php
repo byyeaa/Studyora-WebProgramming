@@ -33,12 +33,43 @@
 
         </div>
 
-        @auth
-        <div class="d-flex align-items-center gap-3">
-            🏆 {{ auth()->user()->total_points }}
-            <x-dropdown>...</x-dropdown>
-        </div>
-        @endauth
+       @auth
+<div class="d-flex align-items-center gap-3 ms-3">
+
+    {{-- POINTS --}}
+    <div class="fw-bold text-dark">
+        🏆 {{ auth()->user()->total_points }}
+    </div>
+
+    {{-- USER DROPDOWN --}}
+    <x-dropdown align="right" width="48">
+        <x-slot name="trigger">
+            <button type="button"
+                class="btn btn-link text-decoration-none fw-semibold d-flex align-items-center"
+                style="color: #0b1846;">
+                {{ Auth::user()->name }}
+            </button>
+        </x-slot>
+
+        <x-slot name="content">
+            <x-dropdown-link :href="route('profile.edit')">
+                Profile
+            </x-dropdown-link>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <x-dropdown-link
+                    :href="route('logout')"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                    Log Out
+                </x-dropdown-link>
+            </form>
+        </x-slot>
+    </x-dropdown>
+
+</div>
+@endauth
+
 
     </div>
 </nav>
