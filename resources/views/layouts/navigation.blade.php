@@ -53,7 +53,7 @@
             </div>
             @endauth
              <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="d-flex align-items-center ms-3">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="btn btn-link text-decoration-none dropdown-toggle fw-semibold d-flex align-items-center"
