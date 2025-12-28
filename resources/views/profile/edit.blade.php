@@ -3,65 +3,36 @@
         <h1 class="fw-bold mb-4">Profile</h1>
     
         <div class="row justify-content-center">
-                <div class="col-md-6">
+            <div class="col-md-6">
+                <div class="card shadow-sm rounded-4 overflow-hidden">
+                    <div class="card-body text-center p-4">
+                        <img 
+                            src="{{ (!empty($user) && !empty($user->photo)) 
+                                ? asset('profiles/'.$user->photo) 
+                                : asset('images/default-avatar.png') }}" 
+                            class="rounded-circle mb-3"
+                            style="width:100px; height:100px; object-fit:cover;"
+                        >
+                        <h4 class="fw-bold mb-1">{{ $user->name ?? 'Guest User' }}</h4>
+                        <p class="text-muted mb-3">{{ $user->email ?? '-' }}</p>
 
-                    <div class="card shadow-sm rounded-4 overflow-hidden">
-
-                        <div class="card-body text-center p-4">
-
-                            <img 
-                                src="{{ (!empty($user) && !empty($user->photo)) 
-                                    ? asset('profiles/'.$user->photo) 
-                                    : asset('images/default-avatar.png') }}" 
-                                class="rounded-circle mb-3"
-                                style="width:100px; height:100px; object-fit:cover;"
-                            >
-
-                            <h4 class="fw-bold mb-1">
-                                {{ $user->name ?? 'Guest User' }}
-                            </h4>
-
-                            <p class="text-muted mb-3">
-                                {{ $user->email ?? '-' }}
-                            </p>
-
-                            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <!-- <div class="mb-3 text-start">
-                                    <label class="form-label fw-semibold">Nama</label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        class="form-control rounded-pill"
-                                        value="{{ $user->name ?? '' }}"
-                                        required
-                                    >
-                                </div> -->
-
-                                <div class="mb-4 text-start">
-                                    <label class="form-label fw-semibold">Foto Profile</label>
-                                    <input 
-                                        type="file" 
-                                        name="photo" 
-                                        class="form-control rounded-pill"
-                                    >
-                                </div>
-
-                                <button class="btn w-100 rounded-pill text-white fw-bold"
-                                        style="background:#1A2A4F;">
-                                    Simpan Foto Profil
-                                </button>
-                            </form>
-
-                        </div>
-
+                        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
+                            <div class="mb-4 text-start">
+                                <label class="form-label fw-semibold">Foto Profile</label>
+                                <input type="file" name="photo" class="form-control rounded-pill">
+                            </div>
+                            <button class="btn w-100 rounded-pill text-white fw-bold" style="background:#1A2A4F;">
+                                Simpan Foto Profil
+                            </button>
+                        </form>
                     </div>
-
                 </div>
             </div>
+        </div>
 
-            <div class="py-12">
+        <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-xl">
