@@ -13,7 +13,7 @@
 </head>
 <body>
 
-@include('layouts.navbar')
+@include('layouts.navigation')
 
 <main class="container-fluid py-4">
     @yield('content')
