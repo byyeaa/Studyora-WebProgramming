@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Quiz_result;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class LeaderboardController extends Controller
 {
     public function index()
-{
-    // Ambil hasil quiz, urutkan dari yang paling tinggi
-    $leaders = Quiz_result::with('user')
-        ->orderByDesc('score')
-        ->get();
+    {
+        // Ambil user beserta total score dari semua quiz_result
+        $leaders = User::withSum('quiz_results', 'score') // hitung total score
+                       ->orderByDesc('quiz_results_sum_score') // urut dari tinggi ke rendah
+                       ->get();
 
-    // Kalikan 10 di sini
-    foreach ($leaders as $item) {
-        $item->final_points = $item->score * 10;
+        // Kalikan 10 jika sesuai logika final_points
+        foreach ($leaders as $user) {
+            $user->final_points = ($user->quiz_results_sum_score ?? 0) * 10;
+        }
+
+        return view('leaderboard', compact('leaders'));
     }
-
-    return view('leaderboard', compact('leaders'));
-}
-
-
 }
