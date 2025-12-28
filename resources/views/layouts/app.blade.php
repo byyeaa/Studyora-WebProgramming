@@ -15,8 +15,10 @@
 
 @include('layouts.navigation')
 
-<main class="container py-4">
+<main class="container-fluid px-4 py-4">
+    <div class="container">
     @yield('content')
+    </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
