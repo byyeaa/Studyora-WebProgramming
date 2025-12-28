@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('images/Logo.png') }}" class="navbar-brand-img" alt="Studyora">
+            <img src="{{ asset('images/Logo.png') }}" class="navbar-brand-img" height="70" alt="Studyora">
         </a>
 
         <button class="navbar-toggler" type="button"
