@@ -87,3 +87,32 @@
         </div>
     </div>
 </nav>
+
+<style>
+    .navbar-collapse {
+        visibility: visible !important;
+    }
+    
+    .navbar-collapse.collapse {
+        display: flex !important;
+    }
+    
+    @media (max-width: 991px) {
+        .navbar-collapse.collapse {
+            display: none !important;
+        }
+    
+        .navbar-collapse.collapse.show {
+            display: block !important;
+        }
+    }
+    
+    .navbar-nav .nav-link.active {
+        font-weight: 700;
+        border-bottom: 2px solid #0b1846;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        opacity: 0.8;
+    }
+</style>
