@@ -4,7 +4,7 @@
 
         {{-- PODIUM TOP 3 --}}
         <div class="card p-4 mb-4">
-            <div class="d-flex justify-content-center align-items-end text-center gap-4">
+            <div class="podium-wrapper d-flex justify-content-center align-items-end text-center gap-4">
 
                 @php
                     $top3 = $leaders->take(3)->values();
@@ -67,8 +67,10 @@
 
     </div>
 </x-app-layout>
+
 <style>
-    @media (max-width: 768px) {
+/* RESPONSIVE TANPA UBAH WIDTH */
+@media (max-width: 768px) {
     .podium-wrapper {
         transform: scale(0.8);
         transform-origin: top center;
