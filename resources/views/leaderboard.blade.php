@@ -10,7 +10,7 @@
                 @endphp
 
                 <!-- Rank 2 -->
-                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px; width:160px;">
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px; width:200px;">
                     @php
                         $user = $top3[1] ?? null;
                         $rank = 2;
@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Rank 1 -->
-                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:0px;  width:160px;">
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:0px;  width:200px;">
                     @php
                         $user = $top3[0];
                         $rank = 1;
@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- Rank 3 -->
-                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px;  width:160px;">
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px;  width:200px;">
                     @php
                         $user = $top3[2] ?? null;
                         $rank = 3;
