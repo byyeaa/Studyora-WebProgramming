@@ -22,17 +22,47 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's profile information + FOTO
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // ===============================
+        // UPDATE DATA PROFILE (DEFAULT)
+        // ===============================
+        $user->fill($request->validated());
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // ===============================
+        // UPLOAD FOTO PROFILE
+        // ===============================
+        if ($request->hasFile('photo')) {
+
+            // validasi foto
+            $request->validate([
+                'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            // hapus foto lama (opsional)
+            if ($user->photo && file_exists(public_path('profiles/'.$user->photo))) {
+                unlink(public_path('profiles/'.$user->photo));
+            }
+
+            // nama file unik
+            $filename = time() . '.' . $request->photo->extension();
+
+            // simpan ke public/profiles
+            $request->photo->move(public_path('profiles'), $filename);
+
+            // simpan ke DB
+            $user->photo = $filename;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
