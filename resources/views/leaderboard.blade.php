@@ -67,3 +67,11 @@
 
     </div>
 </x-app-layout>
+<style>
+    @media (max-width: 768px) {
+    .podium-wrapper {
+        transform: scale(0.8);
+        transform-origin: top center;
+    }
+}
+</style>
