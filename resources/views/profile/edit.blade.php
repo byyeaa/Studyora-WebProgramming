@@ -1,29 +1,20 @@
 <x-app-layout>
     <div class="container p-4">
         <h1 class="fw-bold mb-4">Profile</h1>
-    
+
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-sm rounded-4 overflow-hidden">
                     <div class="card-body text-center p-4">
-                       <!-- <img 
-                            src="{{ $user->photo ?? asset('images/default-avatar.png') }}"
-                            class="rounded-circle mb-3"
-                            style="width:100px; height:100px; object-fit:cover;"
-                        > -->
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill" style="font-size: 80px; color: gold;"></i>
+                        </div>
                         <h4 class="fw-bold mb-1">{{ $user->name ?? 'Guest User' }}</h4>
                         <p class="text-muted mb-3">{{ $user->email ?? '-' }}</p>
 
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
-                            <!-- <div class="mb-4 text-start">
-                                <label class="form-label fw-semibold">Foto Profile</label>
-                                <input type="file" name="photo" class="form-control rounded-pill">
-                            </div>
-                            <button class="btn w-100 rounded-pill text-white fw-bold" style="background:#1A2A4F;">
-                                Simpan Foto Profil
-                            </button> -->
                         </form>
                     </div>
                 </div>
