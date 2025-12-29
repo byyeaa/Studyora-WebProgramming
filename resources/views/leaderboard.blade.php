@@ -9,53 +9,59 @@
                     $top3 = $leaders->take(3)->values();
                 @endphp
 
-                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:30px;">
+                <!-- Rank 2 -->
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px;">
                     @php
                         $user = $top3[1] ?? null;
                         $rank = 2;
-                        $size = '90px';
-                        $fontSize = '24px';
                         $trophyColor = 'silver';
+                        $trophySize = '90px';
+                        $boxFontSize = '24px';
                     @endphp
                     @if($user)
-                        <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
+                        <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $trophySize }}; color: {{ $trophyColor }};"></i>
                         <p class="fw-semibold">{{ $user->name }}</p>
                         <p class="text-muted small">{{ $user->final_points }} Points</p>
-                        <div class="mt-2 bg-primary text-white fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
+                        <div class="mt-2 bg-primary text-white fw-bold rounded" 
+                             style="font-size:{{ $boxFontSize }}; width:90px; height:90px; display:flex; align-items:center; justify-content:center;">
                             {{ $rank }}
                         </div>
                     @endif
                 </div>
 
+                <!-- Rank 1 -->
                 <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:0px;">
                     @php
                         $user = $top3[0];
                         $rank = 1;
-                        $size = '110px';
-                        $fontSize = '28px';
                         $trophyColor = 'gold';
+                        $trophySize = '110px';
+                        $boxFontSize = '28px';
                     @endphp
-                    <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
+                    <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $trophySize }}; color: {{ $trophyColor }};"></i>
                     <p class="fw-semibold">{{ $user->name }}</p>
                     <p class="text-muted small">{{ $user->final_points }} Points</p>
-                    <div class="mt-2 bg-warning fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
+                    <div class="mt-2 bg-warning fw-bold rounded" 
+                         style="font-size:{{ $boxFontSize }}; width:110px; height:110px; display:flex; align-items:center; justify-content:center;">
                         {{ $rank }}
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:30px;">
+                <!-- Rank 3 -->
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:40px;">
                     @php
                         $user = $top3[2] ?? null;
                         $rank = 3;
-                        $size = '90px';
-                        $fontSize = '24px';
                         $trophyColor = '#cd7f32';
+                        $trophySize = '90px';
+                        $boxFontSize = '24px';
                     @endphp
                     @if($user)
-                        <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
+                        <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $trophySize }}; color: {{ $trophyColor }};"></i>
                         <p class="fw-semibold">{{ $user->name }}</p>
                         <p class="text-muted small">{{ $user->final_points }} Points</p>
-                        <div class="mt-2 bg-success text-white fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
+                        <div class="mt-2 bg-success text-white fw-bold rounded" 
+                             style="font-size:{{ $boxFontSize }}; width:90px; height:90px; display:flex; align-items:center; justify-content:center;">
                             {{ $rank }}
                         </div>
                     @endif
