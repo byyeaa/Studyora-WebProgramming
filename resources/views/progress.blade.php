@@ -14,7 +14,8 @@
                         <span class="text-muted">{{ $streakDays ?? 0 }} day(s)</span>
                     </div>
 
-                    <div class="d-flex gap-4">
+                    {{-- STREAK DAYS --}}
+                    <div class="streak-wrapper d-flex gap-4">
                         @php
                             $days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
                         @endphp
@@ -33,7 +34,8 @@
                     </div>
                 </div>
 
-                <div class="mt-4 d-flex justify-content-around text-center">
+                {{-- STATS --}}
+                <div class="stats-wrapper mt-4 d-flex justify-content-around text-center">
                     <div>
                         <h5 class="fw-bold">{{ $totalQuizzes ?? 0 }}</h5>
                         <small>Kuis Selesai</small>
@@ -55,21 +57,21 @@
         <div class="row">
             @forelse($ongoing as $quiz)
                 <div class="col-md-6 mb-3">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm h-100">
                         <div class="card-body">
 
                             <h6 class="fw-bold">{{ $quiz->title }}</h6>
                             <small class="text-muted">{{ $quiz->progress }}% completed</small>
 
                             <div class="progress mt-2" style="height: 6px;">
-                                <div class="progress-bar" role="progressbar"
+                                <div class="progress-bar"
                                     style="width: {{ $quiz->progress }}%; background-color:rgba(69, 159, 53, 1);">
                                 </div>
                             </div>
 
                             <a href="{{ route('quiz.start', $quiz->id) }}" 
-                            class="btn btn-sm mt-3 text-white"
-                            style="background-color:#1A2A4F;">
+                               class="btn btn-sm mt-3 text-white"
+                               style="background-color:#1A2A4F;">
                                 Continue
                             </a>
 
@@ -84,3 +86,20 @@
     </div>
 </x-app-layout>
 
+<style>
+@media (max-width: 768px) {
+    .streak-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem !important;
+    }
+    .stats-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .stats-wrapper .vr {
+        display: none;
+    }
+}
+</style>
