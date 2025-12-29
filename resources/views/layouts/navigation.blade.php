@@ -91,6 +91,7 @@
 <style>
     .navbar-collapse {
         visibility: visible !important;
+        
     }
     
     .navbar-collapse.collapse {
@@ -99,11 +100,14 @@
     
     @media (max-width: 991px) {
         .navbar-collapse.collapse {
-            display: none !important;
+            display: none !important;   
         }
     
         .navbar-collapse.collapse.show {
-            display: block !important;
+            display: block !important;  
+            margin-top: 0.25rem;  
+            background: #d9e8ff;
+            border-radius: 0 0 12px 12px;
         }
     }
     
@@ -115,4 +119,5 @@
     .navbar-nav .nav-link:hover {
         opacity: 0.8;
     }
+
 </style>
