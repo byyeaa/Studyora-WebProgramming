@@ -108,6 +108,7 @@
             margin-top: 0.25rem;  
             background: #d9e8ff;
             border-radius: 0 0 12px 12px;
+            z-index: 1060;  
         }
     }
     
