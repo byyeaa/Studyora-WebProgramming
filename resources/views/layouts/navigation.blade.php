@@ -89,12 +89,6 @@
 </nav>
 
 <style> 
-    .navbar-collapse { 
-        visibility: visible !important; 
-    } 
-    .navbar-collapse.collapse { 
-        display: flex !important; 
-    } 
     @media (max-width: 991px) { 
         .navbar-collapse.collapse { 
             display: none !important; 
