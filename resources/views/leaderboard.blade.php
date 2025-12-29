@@ -19,11 +19,10 @@
                             1 => 'gold',
                             2 => 'silver',
                             3 => '#cd7f32',
-                            default => 'lightgray',
                         };
                     @endphp
-                    <div class="col-4 d-flex flex-column align-items-center">
-                        <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
+                    <div class="col-4">
+                        <i class="bi bi-trophy-fill mx-auto mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
 
                         <p class="fw-semibold">{{ $user->name }}</p>
                         <p class="text-muted small">{{ $user->final_points }} Points</p>
@@ -39,6 +38,7 @@
         @foreach ($leaders->slice(3) as $index => $user)
             <div class="card p-3 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
+
                     <div>
                         <h5 class="fw-bold mb-0">{{ $index + 4 }}. {{ $user->name }}</h5>
                         <small class="text-muted">{{ $user->final_points }} Points</small>
