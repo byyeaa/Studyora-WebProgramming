@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class="container p-4">
-        <h1 class="fw-bold mb-4">Leaderboard</h1>
+
+        {{-- JUDUL --}}
+        <h1 class="fw-bold mb-4"
+            style="font-size:36px; color:#1A2A4F;">
+            Leaderboard
+        </h1>
 
         {{-- PODIUM TOP 3 --}}
         <div class="card p-4 mb-4">
@@ -29,7 +34,7 @@
                     <i class="bi bi-trophy-fill mb-2" style="font-size:110px; color:gold;"></i>
                     <p class="fw-semibold">{{ $top3[0]->name }}</p>
                     <p class="text-muted small">{{ $top3[0]->final_points }} Points</p>
-                    <div class="mt-2 bg-warning fw-bold rounded"
+                    <div class="mt-2 bg-warning fw-bold rounded text-white"
                          style="font-size:28px; width:200px; height:110px; display:flex; align-items:center; justify-content:center;">
                         1
                     </div>
@@ -60,7 +65,7 @@
                         <h5 class="fw-bold mb-0">{{ $index + 4 }}. {{ $user->name }}</h5>
                         <small class="text-muted">{{ $user->final_points }} Points</small>
                     </div>
-                    <i class="bi bi-trophy-fill" style="font-size:40px; color: lightgray;"></i>
+                    <i class="bi bi-trophy-fill" style="font-size:40px; color:lightgray;"></i>
                 </div>
             </div>
         @endforeach
