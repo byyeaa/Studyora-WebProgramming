@@ -193,7 +193,10 @@ class QuizController extends Controller
         // =========================
         $totalQuizzes = Quiz_result::where('user_id', $userId)->count();
     
-        $totalQuestions = Quiz_user_answer::where('user_id', $userId)->count();
+        $totalQuestions = Quiz_user_answer::whereIn(
+            'quiz_result_id',
+            Quiz_result::where('user_id', auth()->id())->pluck('id')
+        )->count();
     
         // =========================
         // ONGOING QUIZ (PER USER)
