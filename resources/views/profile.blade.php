@@ -8,13 +8,12 @@
 
                     <div class="card-body text-center p-4">
 
-                        <img 
-                            src="{{ (!empty($user) && !empty($user->photo)) 
-                                ? asset('profiles/'.$user->photo) 
-                                : asset('images/default-avatar.png') }}" 
+                       <img 
+                            src="{{ $user->photo ?: asset('images/default-avatar.png') }}"
                             class="rounded-circle mb-3"
                             style="width:100px; height:100px; object-fit:cover;"
                         >
+
 
                         <h4 class="fw-bold mb-1">
                             {{ $user->name ?? 'Guest User' }}
