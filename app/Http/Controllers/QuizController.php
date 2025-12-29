@@ -170,50 +170,68 @@ class QuizController extends Controller
     }
 
     public function progress()
-    {
-        $dates = Quiz_result::selectRaw('DATE(created_at) as d')
-            ->pluck('d')
-            ->unique();
+{
+    $userId = Auth::id();
 
-        $streakIndexes = $dates->map(function($d) {
-            return date('N', strtotime($d)) - 1;
-        })->toArray();
+    // =========================
+    // STREAK (PER USER)
+    // =========================
+    $dates = Quiz_result::where('user_id', $userId)
+        ->selectRaw('DATE(created_at) as d')
+        ->pluck('d')
+        ->unique();
 
-        $streakDays = count($streakIndexes);
+    $streakIndexes = $dates->map(function ($d) {
+        return date('N', strtotime($d)) - 1; // 0 = Mon
+    })->toArray();
 
-        $totalQuizzes = Quiz_result::count();
-        $totalQuestions = Quiz_user_answer::count();
+    $streakDays = count($streakIndexes);
 
-        $ongoing = Quiz_result::with('quiz')
-            ->get()
-            ->map(function ($r) {
-                $total = Quiz_user_answer::where('quiz_result_id', $r->id)->count();
-                $benar = Quiz_user_answer::where('quiz_result_id', $r->id)
-                            ->where('is_correct', 1)
-                            ->count();
+    // =========================
+    // TOTAL QUIZ & QUESTION
+    // =========================
+    $totalQuizzes = Quiz_result::where('user_id', $userId)->count();
 
-                $progress = $total > 0 ? round(($benar / $total) * 100) : 0;
+    $totalQuestions = Quiz_user_answer::where('user_id', $userId)->count();
 
-                return (object)[
-                    'id' => $r->quiz->id,
-                    'title' => $r->quiz->title,
-                    'progress' => $progress
-                ];
-            })
-            ->filter(fn($q) => $q->progress < 100)
-            ->values();
+    // =========================
+    // ONGOING QUIZ (PER USER)
+    // =========================
+    $ongoing = Quiz_result::with('quiz')
+        ->where('user_id', $userId)
+        ->get()
+        ->map(function ($r) {
+            $total = Quiz_user_answer::where('quiz_result_id', $r->id)->count();
 
-        $level = floor($totalQuizzes / 10) + 1;
+            $benar = Quiz_user_answer::where('quiz_result_id', $r->id)
+                ->where('is_correct', 1)
+                ->count();
 
-        return view('progress', compact(
-            'level',
-            'streakIndexes',
-            'streakDays',
-            'totalQuizzes',
-            'totalQuestions',
-            'ongoing'
-        ));
-    }
+            $progress = $total > 0 ? round(($benar / $total) * 100) : 0;
+
+            return (object)[
+                'id' => $r->quiz->id,
+                'title' => $r->quiz->title,
+                'progress' => $progress
+            ];
+        })
+        ->filter(fn ($q) => $q->progress < 100)
+        ->values();
+
+    // =========================
+    // LEVEL (PER USER)
+    // =========================
+    $level = floor($totalQuizzes / 10) + 1;
+
+    return view('progress', compact(
+        'level',
+        'streakIndexes',
+        'streakDays',
+        'totalQuizzes',
+        'totalQuestions',
+        'ongoing'
+    ));
+}
 
     public function finish($resultId)
     {
