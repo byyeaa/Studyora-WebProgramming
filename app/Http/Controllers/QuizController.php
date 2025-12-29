@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Option;
 use App\Models\Quiz_result;
 use App\Models\Quiz_user_answer;
-use App\Http\Controllers\Auth;
+
 
 class QuizController extends Controller
 {
