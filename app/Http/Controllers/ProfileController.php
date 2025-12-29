@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -22,7 +23,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information + FOTO
+     * Update the user's profile information + FOTO (SUPABASE)
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
@@ -38,28 +39,37 @@ class ProfileController extends Controller
         }
 
         // ===============================
-        // UPLOAD FOTO PROFILE
+        // UPLOAD FOTO KE SUPABASE
         // ===============================
         if ($request->hasFile('photo')) {
 
-            // validasi foto
             $request->validate([
                 'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
-            // hapus foto lama (opsional)
-            if ($user->photo && file_exists(public_path('profiles/'.$user->photo))) {
-                unlink(public_path('profiles/'.$user->photo));
+            $file = $request->file('photo');
+            $filename = uniqid().'_'.$file->getClientOriginalName();
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.env('SUPABASE_KEY'),
+                'apikey' => env('SUPABASE_KEY'),
+                'Content-Type' => $file->getMimeType(),
+            ])->post(
+                env('SUPABASE_URL')
+                .'/storage/v1/object/'
+                .env('SUPABASE_BUCKET')
+                .'/'.$filename,
+                file_get_contents($file)
+            );
+
+            if ($response->successful()) {
+                // simpan URL ke DB
+                $user->photo =
+                    env('SUPABASE_URL')
+                    .'/storage/v1/object/public/'
+                    .env('SUPABASE_BUCKET')
+                    .'/'.$filename;
             }
-
-            // nama file unik
-            $filename = time() . '.' . $request->photo->extension();
-
-            // simpan ke public/profiles
-            $request->photo->move(public_path('profiles'), $filename);
-
-            // simpan ke DB
-            $user->photo = $filename;
         }
 
         $user->save();
@@ -79,7 +89,6 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();
