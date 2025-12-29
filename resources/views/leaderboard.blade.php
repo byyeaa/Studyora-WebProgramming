@@ -7,22 +7,28 @@
                 @foreach($leaders->take(3) as $index => $user)
                     @php
                         $rank = $index + 1;
+                        $bgClass = match($rank) {
+                            1 => 'bg-warning text-white',
+                            2 => 'bg-primary text-white',
+                            3 => 'bg-success text-white',
+                            default => 'bg-light',
+                        };
+                        $size = ($rank == 1) ? '95px' : '80px';
+                        $fontSize = ($rank == 1) ? '26px' : '22px';
                         $trophyColor = match($rank) {
                             1 => 'gold',
                             2 => 'silver',
                             3 => '#cd7f32',
                             default => 'lightgray',
                         };
-                        $size = ($rank == 1) ? '95px' : '80px';
-                        $fontSize = ($rank == 1) ? '26px' : '22px';
                     @endphp
-                    <div class="col-4">
+                    <div class="col-4 d-flex flex-column align-items-center">
                         <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
 
                         <p class="fw-semibold">{{ $user->name }}</p>
                         <p class="text-muted small">{{ $user->final_points }} Points</p>
 
-                        <div class="mt-2 fw-bold rounded p-3" style="font-size:{{ $fontSize }}; background-color: {{ $trophyColor }}; color: white;">
+                        <div class="mt-2 {{ $bgClass }} fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
                             {{ $rank }}
                         </div>
                     </div>
