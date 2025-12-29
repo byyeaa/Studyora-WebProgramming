@@ -23,58 +23,62 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information + FOTO (SUPABASE)
+     * UPDATE DATA PROFILE (BREEZE)
+     * ⚠️ JANGAN PAKAI INI BUAT FOTO
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
 
-        // ===============================
-        // UPDATE DATA PROFILE (DEFAULT)
-        // ===============================
         $user->fill($request->validated());
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
 
-        // ===============================
-        // UPLOAD FOTO KE SUPABASE
-        // ===============================
-        if ($request->hasFile('photo')) {
-
-            $request->validate([
-                'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
-            ]);
-
-            $file = $request->file('photo');
-            $filename = uniqid().'_'.$file->getClientOriginalName();
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('SUPABASE_KEY'),
-                'apikey' => env('SUPABASE_KEY'),
-                'Content-Type' => $file->getMimeType(),
-            ])->post(
-                env('SUPABASE_URL')
-                .'/storage/v1/object/'
-                .env('SUPABASE_BUCKET')
-                .'/'.$filename,
-                file_get_contents($file)
-            );
-
-            if ($response->successful()) {
-                // simpan URL ke DB
-                $user->photo =
-                    env('SUPABASE_URL')
-                    .'/storage/v1/object/public/'
-                    .env('SUPABASE_BUCKET')
-                    .'/'.$filename;
-            }
-        }
-
         $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * ✅ UPDATE FOTO PROFILE (SUPABASE)
+     * INI YANG DIPAKAI FORM FOTO
+     */
+    public function updatePhoto(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ]);
+
+        $user = $request->user();
+
+        $file = $request->file('photo');
+        $filename = uniqid().'_'.$file->getClientOriginalName();
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.env('SUPABASE_KEY'),
+            'apikey' => env('SUPABASE_KEY'),
+            'Content-Type' => $file->getMimeType(),
+        ])->post(
+            env('SUPABASE_URL')
+            .'/storage/v1/object/'
+            .env('SUPABASE_BUCKET')
+            .'/'.$filename,
+            file_get_contents($file)
+        );
+
+        if ($response->successful()) {
+            $user->photo =
+                env('SUPABASE_URL')
+                .'/storage/v1/object/public/'
+                .env('SUPABASE_BUCKET')
+                .'/'.$filename;
+
+            $user->save();
+        }
+
+        return Redirect::route('profile.edit')->with('status', 'photo-updated');
     }
 
     /**
