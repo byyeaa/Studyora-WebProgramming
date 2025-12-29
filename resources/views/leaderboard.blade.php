@@ -17,7 +17,7 @@
                     <p class="fw-semibold">{{ $top3[1]->name }}</p>
                     <p class="text-muted small">{{ $top3[1]->final_points }} Points</p>
                     <div class="mt-2 bg-primary text-white fw-bold rounded"
-                         style="font-size:24px; width:90px; height:90px; display:flex; align-items:center; justify-content:center;">
+                         style="font-size:24px; width:200px; height:90px; display:flex; align-items:center; justify-content:center;">
                         2
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <p class="fw-semibold">{{ $top3[0]->name }}</p>
                     <p class="text-muted small">{{ $top3[0]->final_points }} Points</p>
                     <div class="mt-2 bg-warning fw-bold rounded"
-                         style="font-size:28px; width:110px; height:110px; display:flex; align-items:center; justify-content:center;">
+                         style="font-size:28px; width:200px; height:110px; display:flex; align-items:center; justify-content:center;">
                         1
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <p class="fw-semibold">{{ $top3[2]->name }}</p>
                     <p class="text-muted small">{{ $top3[2]->final_points }} Points</p>
                     <div class="mt-2 bg-success text-white fw-bold rounded"
-                         style="font-size:24px; width:90px; height:90px; display:flex; align-items:center; justify-content:center;">
+                         style="font-size:24px; width:200px; height:90px; display:flex; align-items:center; justify-content:center;">
                         3
                     </div>
                 </div>
