@@ -4,32 +4,17 @@
 
         <div class="card p-4 mb-4">
             <div class="row justify-content-center align-items-end text-center">
+
                 @php
                     $top3 = $leaders->take(3)->values();
                 @endphp
 
-                <div class="col-4 d-flex flex-column align-items-center order-2">
-                    @php
-                        $user = $top3[0];
-                        $rank = 1;
-                        $size = '95px';
-                        $fontSize = '26px';
-                        $trophyColor = 'gold';
-                    @endphp
-                    <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
-                    <p class="fw-semibold">{{ $user->name }}</p>
-                    <p class="text-muted small">{{ $user->final_points }} Points</p>
-                    <div class="mt-2 bg-warning fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
-                        {{ $rank }}
-                    </div>
-                </div>
-
-                <div class="col-4 d-flex flex-column align-items-center order-1">
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:30px;">
                     @php
                         $user = $top3[1] ?? null;
                         $rank = 2;
-                        $size = '80px';
-                        $fontSize = '22px';
+                        $size = '90px';
+                        $fontSize = '24px';
                         $trophyColor = 'silver';
                     @endphp
                     @if($user)
@@ -42,12 +27,28 @@
                     @endif
                 </div>
 
-                <div class="col-4 d-flex flex-column align-items-center order-3">
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:0px;">
+                    @php
+                        $user = $top3[0];
+                        $rank = 1;
+                        $size = '110px';
+                        $fontSize = '28px';
+                        $trophyColor = 'gold';
+                    @endphp
+                    <i class="bi bi-trophy-fill mb-2" style="font-size:{{ $size }}; color: {{ $trophyColor }};"></i>
+                    <p class="fw-semibold">{{ $user->name }}</p>
+                    <p class="text-muted small">{{ $user->final_points }} Points</p>
+                    <div class="mt-2 bg-warning fw-bold rounded p-3" style="font-size:{{ $fontSize }};">
+                        {{ $rank }}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-4 d-flex flex-column align-items-center" style="margin-top:30px;">
                     @php
                         $user = $top3[2] ?? null;
                         $rank = 3;
-                        $size = '80px';
-                        $fontSize = '22px';
+                        $size = '90px';
+                        $fontSize = '24px';
                         $trophyColor = '#cd7f32';
                     @endphp
                     @if($user)
@@ -59,6 +60,7 @@
                         </div>
                     @endif
                 </div>
+
             </div>
         </div>
 
