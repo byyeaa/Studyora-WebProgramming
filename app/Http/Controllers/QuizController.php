@@ -177,10 +177,10 @@ class QuizController extends Controller
         // =========================
         // STREAK (PER USER)
         // =========================
-        $dates = Quiz_result::where('user_id', $userId)
-            ->selectRaw('DATE(created_at) as d')
-            ->pluck('d')
-            ->unique();
+       $dates = Quiz_result::where('user_id', auth()->id())
+        ->selectRaw('DATE(created_at) as d')
+        ->pluck('d')
+        ->unique();
     
         $streakIndexes = $dates->map(function ($d) {
             return date('N', strtotime($d)) - 1; // 0 = Mon
