@@ -23,21 +23,33 @@
 <body style="background-color: #ffffff;">
 
     {{-- NAVBAR --}}
-    <nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
-        <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg px-4"
+     style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
+    <div class="container-fluid d-flex align-items-center">
 
-            {{-- Brand --}}
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-                <img src="{{ asset('images/Logo.png') }}" height="70" class="me-2">
+        {{-- Brand --}}
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <img src="{{ asset('images/Logo.png') }}" height="50" class="me-2">
+        </a>
+
+        {{-- Auth Buttons --}}
+        <div class="ms-auto d-flex align-items-center">
+            <a href="{{ route('login') }}"
+               class="btn btn-link fw-semibold me-3"
+               style="text-decoration:none; color:#0b1846;">
+                Login
             </a>
 
-            {{-- Auth Buttons --}}
-            <div class="ms-auto d-flex align-items-center">
-                <a href="{{ route('login') }}" class="btn btn-link fw-semibold text-dark me-3" style="text-decoration: none; color: #0b1846;">Login</a>
-                <a href="{{ route('register') }}" class="btn fw-semibold text-white" style="background-color: #0b1846; border-radius: 7px; padding: 6px 20px;">Sign Up</a>
-            </div>
+            <a href="{{ route('register') }}"
+               class="btn fw-semibold text-white"
+               style="background-color:#0b1846; border-radius:7px; padding:6px 20px;">
+                Sign Up
+            </a>
         </div>
-    </nav>
+
+    </div>
+</nav>
+
 
     {{-- MAIN CONTENT --}}
     <div class="w-100">
