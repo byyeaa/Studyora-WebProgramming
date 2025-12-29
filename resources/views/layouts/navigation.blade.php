@@ -1,14 +1,27 @@
 {{-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
+<nav class="navbar navbar-expand-lg px-4"
+     style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
+
     <div class="container-fluid">
 
         {{-- Brand/Logo --}}
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
-            <img src="{{ asset('images/Logo.png') }}" height="70" width="170" class="me-2" alt="Studyora Logo">
+        <a class="navbar-brand fw-bold d-flex align-items-center"
+           href="{{ route('home') }}">
+            <img src="{{ asset('images/Logo.png') }}"
+                 height="70"
+                 width="170"
+                 class="me-2"
+                 alt="Studyora Logo">
         </a>
 
         {{-- Hamburger Button --}}
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -16,7 +29,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto ms-4">
 
-                {{-- HOME --}}
                 <li class="nav-item">
                     <a class="nav-link fw-semibold {{ request()->routeIs('home') ? 'active' : '' }}"
                        href="{{ route('home') }}"
@@ -25,7 +37,6 @@
                     </a>
                 </li>
 
-                {{-- QUIZ --}}
                 <li class="nav-item">
                     <a class="nav-link fw-semibold {{ request()->routeIs('quiz.*') ? 'active' : '' }}"
                        href="{{ route('quiz.index') }}"
@@ -34,7 +45,6 @@
                     </a>
                 </li>
 
-                {{-- PROGRESS (FIXED) --}}
                 <li class="nav-item">
                     <a class="nav-link fw-semibold {{ request()->is('progress') ? 'active' : '' }}"
                        href="{{ route('progress') }}"
@@ -43,7 +53,6 @@
                     </a>
                 </li>
 
-                {{-- LEADERBOARD (FIXED) --}}
                 <li class="nav-item">
                     <a class="nav-link fw-semibold {{ request()->is('leaderboard') ? 'active' : '' }}"
                        href="{{ route('leaderboard') }}"
@@ -89,36 +98,70 @@
 </nav>
 
 <style>
-    .navbar-collapse {
-        visibility: visible !important;
-        
-    }
-    
+/* ================= DESKTOP DEFAULT ================= */
+.navbar-collapse {
+    visibility: visible !important;
+}
+
+.navbar-collapse.collapse {
+    display: flex !important;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 991px) {
+
     .navbar-collapse.collapse {
-        display: flex !important;
-    }
-    
-    @media (max-width: 991px) {
-        .navbar-collapse.collapse {
-            display: none !important;   
-        }
-    
-        .navbar-collapse.collapse.show {
-            display: block !important;  
-            margin-top: 0.25rem;  
-            background: #d9e8ff;
-            border-radius: 0 0 12px 12px;
-            z-index: 1060;  
-        }
-    }
-    
-    .navbar-nav .nav-link.active {
-        font-weight: 700;
-        border-bottom: 2px solid #0b1846;
-    }
-    
-    .navbar-nav .nav-link:hover {
-        opacity: 0.8;
+        display: none !important;
     }
 
+    .navbar-collapse.collapse.show {
+        display: block !important;
+        margin-top: 0.25rem;
+        background: #d9e8ff;
+        border-radius: 0 0 12px 12px;
+
+        position: relative;   /* penting buat z-index */
+        z-index: 1060;
+    }
+
+    /* dropdown profile di atas menu */
+    .dropdown-menu {
+        position: absolute;
+        z-index: 1070;
+    }
+
+    /* rapihin navbar */
+    .navbar {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* logo center */
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        height: 70px;
+    }
+
+    /* kecilin logo biar pas */
+    .navbar-brand img {
+        height: 50px;
+        width: auto;
+    }
+
+    /* burger sejajar logo */
+    .navbar-toggler {
+        align-self: center;
+    }
+}
+
+/* ================= LINK STYLE ================= */
+.navbar-nav .nav-link.active {
+    font-weight: 700;
+    border-bottom: 2px solid #0b1846;
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.8;
+}
 </style>
