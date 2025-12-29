@@ -1,5 +1,5 @@
 {{-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px; position: relative; z-index: 1050;">
+<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
     <div class="container-fluid">
 
         {{-- Brand/Logo --}}
@@ -87,20 +87,3 @@
         </div>
     </div>
 </nav>
-
-<style> 
-    @media (max-width: 991px) { 
-        .navbar-collapse.collapse { 
-            display: none !important; 
-        } 
-        .navbar-collapse.collapse.show { 
-            display: block !important; 
-        } 
-    } 
-    .navbar-nav .nav-link.active { 
-        font-weight: 700; border-bottom: 2px solid #0b1846; 
-    } 
-    .navbar-nav .nav-link:hover { 
-        opacity: 0.8; 
-    } 
-</style>
