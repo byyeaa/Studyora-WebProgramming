@@ -107,6 +107,3 @@
     } 
 </style>
 
-
-
-kalo ini gimana
