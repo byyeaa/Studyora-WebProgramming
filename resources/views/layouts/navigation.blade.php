@@ -1,5 +1,5 @@
 {{-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px;">
+<nav class="navbar navbar-expand-lg px-4" style="background-color: #d9e8ff; border-bottom: 1px solid #e6e6e6; height: 70px; position: relative; z-index: 1050;">
     <div class="container-fluid">
 
         {{-- Brand/Logo --}}
@@ -87,23 +87,54 @@
         </div>
     </div>
 </nav>
-<style> 
-    .navbar-collapse { 
-        visibility: visible !important; 
-    } 
-    .navbar-collapse.collapse { 
-        display: flex !important; 
-    } 
-    @media (max-width: 991px) { 
-    .navbar-collapse.collapse { 
-        display: none !important; } 
-    .navbar-collapse.collapse.show { 
-        display: block !important; } 
-    } 
-    .navbar-nav .nav-link.active { 
-        font-weight: 700; border-bottom: 2px solid #0b1846; 
-    } .navbar-nav .nav-link:hover { 
-        opacity: 0.8; 
-    } 
-</style>
 
+<style>
+.navbar-nav .nav-link {
+    color: #0b1846;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 700;
+    border-bottom: 2px solid #0b1846;
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 991px) {
+    .navbar {
+        align-items: center;
+    }
+
+    .navbar-collapse {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .navbar-nav {
+        align-items: center;
+        gap: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 8px 0;
+    }
+
+    .points-display {
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    .navbar-collapse .d-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+}
+</style>
