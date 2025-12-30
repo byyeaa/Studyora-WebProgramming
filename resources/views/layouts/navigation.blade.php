@@ -83,7 +83,7 @@
     .navbar-collapse.collapse.show{
     display:block!important;
     margin-top:.25rem;
-    background:#d9e8ff;
+    background:#ffffff;
     border-radius:0 0 12px 12px;
     position:relative;
     z-index:1060
