@@ -76,49 +76,52 @@
 </nav>
 
 <style>
-   <style>
-/* ===== DESKTOP ===== */
-@media (min-width: 992px) {
-    .navbar-collapse {
-        display: flex !important;
-        visibility: visible !important;
+    .navbar-collapse{visibility:visible!important}
+    .navbar-collapse.collapse{display:flex!important}
+    @media(max-width:991px){
+    .navbar-collapse.collapse{display:none!important}
+    .navbar-collapse.collapse.show{
+    display:block!important;
+    margin-top:.25rem;
+    background:#ffffff;
+    border-radius:0 0 12px 12px;
+    position:relative;
+    z-index:1060
     }
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        display: none;
-        background: #ffffff;
-        border-radius: 0 0 12px 12px;
-        padding: 12px 0;
+    .profile-wrapper{width:100%}
+    .profile-wrapper .dropdown-menu{
+    position:static!important;
+    width:100%!important;
+    margin-top:.5rem;
+    box-shadow:none;
+    border-radius:8px
     }
+    .profile-wrapper .dropdown-menu a{text-align:center}
+    .navbar{padding-top:0!important;padding-bottom:0!important}
+    .navbar-brand{display:flex;align-items:center;height:70px}
+    .navbar-brand img{height:50px;width:auto}
+    .navbar-toggler{align-self:center}
+    }
+    .navbar-nav .nav-link.active{
+    font-weight:700;
+    border-bottom:2px solid #0b1846
+    }
+    .navbar-nav .nav-link:hover{opacity:.8}
 
+    @media (max-width: 991px) {
     .navbar-collapse.show {
-        display: block;
-    }
-
-    .navbar-nav {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-    .navbar-nav .nav-item {
-        margin: 6px 0;
-    }
-
-    .navbar-nav .nav-link {
-        display: inline-block;
+        overflow-x: hidden;
     }
 
     .points-display {
-        margin: 12px 0 0 0 !important;
+        margin-left: 0 !important;
+        margin-top: 12px;
         text-align: center;
         width: 100%;
     }
 
     .profile-wrapper {
+        margin-left: 0 !important;
         margin-top: 8px;
         width: 100%;
         display: flex;
@@ -126,7 +129,7 @@
     }
 
     .profile-wrapper button {
-        width: auto;
+        width: 100%;
         text-align: center;
     }
 
@@ -135,36 +138,7 @@
         width: 100% !important;
         margin-top: 8px;
         box-shadow: none;
-        text-align: center;
     }
 }
-
-/* ===== UMUM ===== */
-.navbar {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    height: 70px;
-}
-
-.navbar-brand img {
-    height: 50px;
-    width: auto;
-}
-
-.navbar-nav .nav-link.active {
-    font-weight: 700;
-    border-bottom: 2px solid #0b1846;
-}
-
-.navbar-nav .nav-link:hover {
-    opacity: .8;
-}
-</style>
-
 
 </style>
