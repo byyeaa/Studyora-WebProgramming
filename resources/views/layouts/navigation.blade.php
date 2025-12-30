@@ -140,7 +140,7 @@
         box-shadow: none;
     }
 }
-  @media (max-width: 414px) {
+ @media (max-width: 414px) {
     .profile-wrapper {
         display: flex;
         justify-content: center;
@@ -150,9 +150,10 @@
         left: 50% !important;
         transform: translateX(-50%) !important;
         right: auto !important;
-        margin-top: 8px !important;
+        margin-top: 10px !important;
     }
 }
+
 
 
 
