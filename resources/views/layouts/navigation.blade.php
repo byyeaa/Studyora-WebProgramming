@@ -154,6 +154,17 @@
     }
 }
 
+@media (max-width: 991px) {
+    .profile-wrapper .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        right: auto !important;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+}
 
 
 
