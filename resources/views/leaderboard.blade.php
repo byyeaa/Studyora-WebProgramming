@@ -63,15 +63,13 @@
 </x-app-layout>
 
 <style>
-/* DESKTOP & TABLET: NORMAL */
 .podium-card {
     overflow: hidden;
 }
-
-/* MOBILE: KECILIN SEMUA SECARA NATURAL */
+    
 @media (max-width: 576px) {
     .podium-wrapper {
-        zoom: 0.6;
+        zoom: 0.4;
         justify-content: center;
     }
 
