@@ -157,6 +157,7 @@
         position: static !important;
         width: 100% !important;
         margin-top: 10px;
+        margin-bottom: 18px;
         box-shadow: none;
         border-radius: 10px;
         text-align: center;
