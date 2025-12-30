@@ -129,7 +129,6 @@
         overflow: visible;
     }
 
-    @media (max-width: 991px) {
     .navbar-collapse.show {
         overflow-x: hidden;
     }
@@ -164,7 +163,6 @@
         right: auto !important;
         transform: none !important;
     }
-}
 
 
 
