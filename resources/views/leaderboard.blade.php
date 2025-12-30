@@ -84,4 +84,12 @@
         transform-origin: top center;
     }
 }
+
+@media (max-width: 420px) {
+    .podium-wrapper {
+        transform: scale(0.52);
+        transform-origin: top center;
+    }
+}
+
 </style>
