@@ -53,7 +53,7 @@
                            <button class="btn btn-link fw-semibold text-decoration-none d-flex align-items-center gap-1"
                                     style="color:#0b1846;">
                                 {{ Auth::user()->name }}
-                                <i class="bi bi-chevron-down"></i>
+                                <i class="bi bi-caret-down-fill dropdown-caret"></i>
                             </button>
                         </x-slot>
 
@@ -77,6 +77,11 @@
 </nav>
 
 <style>
+    .dropdown-caret {
+        font-size: 0.65rem;
+        margin-top: 2px;
+    }
+
     .navbar-collapse{
         visibility:visible!important
     }
