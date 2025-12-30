@@ -76,29 +76,58 @@
 </nav>
 
 <style>
-    .navbar-collapse{visibility:visible!important}
-    .navbar-collapse.collapse{display:flex!important}
-    @media(max-width:991px){
-    .navbar-collapse.collapse{display:none!important}
-    .navbar-collapse.collapse.show{
-    display:block!important;
-    margin-top:.25rem;
-    background:#ffffff;
-    border-radius:0 0 12px 12px;
-    position:relative;
-    z-index:1060
+    .navbar-collapse{
+        visibility:visible!important
     }
-    .profile-wrapper .dropdown-menu a{text-align:center}
-    .navbar{padding-top:0!important;padding-bottom:0!important}
-    .navbar-brand{display:flex;align-items:center;height:70px}
-    .navbar-brand img{height:50px;width:auto}
-    .navbar-toggler{align-self:center}
+    .navbar-collapse.collapse{
+        display:flex!important
+    }
+   
+    @media(max-width:991px){
+        
+    .navbar-collapse.collapse{
+        display:none!important
+    }
+   
+    .navbar-collapse.collapse.show{
+        display:block!important;
+        margin-top:.25rem;
+        background:#ffffff;
+        border-radius:0 0 12px 12px;
+        position:relative;
+        z-index:1060;
+    }
+        
+    .profile-wrapper .dropdown-menu a{
+        text-align:center
+    }
+        
+    .navbar{
+        padding-top:0!important;
+        padding-bottom:0!important
+    }
+   
+    .navbar-brand{
+        display:flex;
+        align-items:center;
+        height:70px
+    }
+        
+    .navbar-brand img{
+        height:50px;
+        width:auto
+    }
+    .navbar-toggler{
+        align-self:center}
     }
     .navbar-nav .nav-link.active{
-    font-weight:700;
-    border-bottom:2px solid #0b1846
+        font-weight:700;
+        border-bottom:2px solid #0b1846
     }
     .navbar-nav .nav-link:hover{opacity:.8}
+    .profile-wrapper {
+        overflow: visible;
+    }
 
     @media (max-width: 991px) {
     .navbar-collapse.show {
