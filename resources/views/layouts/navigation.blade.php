@@ -140,5 +140,18 @@
         box-shadow: none;
     }
 }
+    @media (max-width: 414px) {
+    .profile-wrapper .dropdown-menu {
+        width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .profile-wrapper .dropdown-menu a {
+        padding: 6px 0;
+        font-size: 13px;
+    }
+}
+
 
 </style>
