@@ -2,7 +2,7 @@
     <div class="container p-4">
         <h1 class="fw-bold mb-4">Leaderboard</h1>
 
-        <div class="card p-4 mb-4">
+        <div class="card p-4 mb-4 podium-scale">
             <div class="podium-wrapper d-flex justify-content-center align-items-end text-center gap-4">
 
                 @php
@@ -12,9 +12,9 @@
                 @if(isset($top3[1]))
                 <div class="d-flex flex-column align-items-center" style="margin-top:40px; width:250px; flex-shrink:0;">
                     <i class="bi bi-trophy-fill mb-2" style="font-size:90px; color:silver;"></i>
-                    <p class="fw-semibold">{{ $top3[1]->name }}</p>
-                    <p class="text-muted small">{{ $top3[1]->final_points }} Points</p>
-                    <div class="mt-2 bg-primary text-white fw-bold rounded"
+                    <p class="fw-semibold mb-1">{{ $top3[1]->name }}</p>
+                    <p class="text-muted small mb-2">{{ $top3[1]->final_points }} Points</p>
+                    <div class="bg-primary text-white fw-bold rounded"
                          style="font-size:24px; width:200px; height:90px; display:flex; align-items:center; justify-content:center;">
                         2
                     </div>
@@ -24,9 +24,9 @@
                 @if(isset($top3[0]))
                 <div class="d-flex flex-column align-items-center" style="width:280px; flex-shrink:0;">
                     <i class="bi bi-trophy-fill mb-2" style="font-size:110px; color:gold;"></i>
-                    <p class="fw-semibold">{{ $top3[0]->name }}</p>
-                    <p class="text-muted small">{{ $top3[0]->final_points }} Points</p>
-                    <div class="mt-2 bg-warning text-white fw-bold rounded"
+                    <p class="fw-semibold mb-1">{{ $top3[0]->name }}</p>
+                    <p class="text-muted small mb-2">{{ $top3[0]->final_points }} Points</p>
+                    <div class="bg-warning text-white fw-bold rounded"
                          style="font-size:28px; width:200px; height:110px; display:flex; align-items:center; justify-content:center;">
                         1
                     </div>
@@ -36,9 +36,9 @@
                 @if(isset($top3[2]))
                 <div class="d-flex flex-column align-items-center" style="margin-top:40px; width:250px; flex-shrink:0;">
                     <i class="bi bi-trophy-fill mb-2" style="font-size:90px; color:#cd7f32;"></i>
-                    <p class="fw-semibold">{{ $top3[2]->name }}</p>
-                    <p class="text-muted small">{{ $top3[2]->final_points }} Points</p>
-                    <div class="mt-2 bg-success text-white fw-bold rounded"
+                    <p class="fw-semibold mb-1">{{ $top3[2]->name }}</p>
+                    <p class="text-muted small mb-2">{{ $top3[2]->final_points }} Points</p>
+                    <div class="bg-success text-white fw-bold rounded"
                          style="font-size:24px; width:200px; height:90px; display:flex; align-items:center; justify-content:center;">
                         3
                     </div>
@@ -65,31 +65,30 @@
 
 <style>
 @media (max-width: 992px) {
-    .podium-wrapper {
+    .podium-scale {
         transform: scale(0.85);
         transform-origin: top center;
     }
 }
 
 @media (max-width: 768px) {
-    .podium-wrapper {
+    .podium-scale {
         transform: scale(0.7);
         transform-origin: top center;
     }
 }
 
 @media (max-width: 576px) {
-    .podium-wrapper {
+    .podium-scale {
         transform: scale(0.6);
         transform-origin: top center;
     }
 }
 
 @media (max-width: 420px) {
-    .podium-wrapper {
+    .podium-scale {
         transform: scale(0.52);
         transform-origin: top center;
     }
 }
-
 </style>
