@@ -99,10 +99,21 @@
         border-radius: 10px;
         text-align: center;
 
-        /* PENTING: reset semua positioning */
         left: auto !important;
         right: auto !important;
         transform: none !important;
+    }
+        .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-collapse.collapse.show {
+        display: block !important;
+        margin-top: .25rem;
+        background: #ffffff;
+        border-radius: 0 0 12px 12px;
+        position: relative;
+        z-index: 1060;
     }
 }
 
