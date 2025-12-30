@@ -140,26 +140,20 @@
         box-shadow: none;
     }
 }
-   @media (max-width: 414px) {
+  @media (max-width: 414px) {
+    .profile-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
     .profile-wrapper .dropdown-menu {
-        background: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        right: auto !important;
         margin-top: 8px !important;
     }
-
-    .profile-wrapper .dropdown-menu a {
-        background: transparent !important;
-        padding: 10px 0;
-        text-align: center;
-        font-weight: 500;
-    }
-
-    .profile-wrapper .dropdown-menu a:hover {
-        background: rgba(0,0,0,0.05);
-    }
 }
+
 
 
 
