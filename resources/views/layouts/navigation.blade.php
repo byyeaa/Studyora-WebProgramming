@@ -50,9 +50,10 @@
                 <div class="d-flex align-items-center ms-3 position-relative profile-wrapper">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="btn btn-link fw-semibold text-decoration-none"
+                           <button class="btn btn-link fw-semibold text-decoration-none d-flex align-items-center gap-1"
                                     style="color:#0b1846;">
                                 {{ Auth::user()->name }}
+                                <i class="bi bi-chevron-down"></i>
                             </button>
                         </x-slot>
 
