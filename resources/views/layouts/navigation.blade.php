@@ -140,18 +140,27 @@
         box-shadow: none;
     }
 }
-    @media (max-width: 414px) {
+   @media (max-width: 414px) {
     .profile-wrapper .dropdown-menu {
-        width: 90% !important;
-        margin-left: auto;
-        margin-right: auto;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-top: 8px !important;
     }
 
     .profile-wrapper .dropdown-menu a {
-        padding: 6px 0;
-        font-size: 13px;
+        background: transparent !important;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .profile-wrapper .dropdown-menu a:hover {
+        background: rgba(0,0,0,0.05);
     }
 }
+
 
 
 </style>
