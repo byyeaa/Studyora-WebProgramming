@@ -126,10 +126,23 @@
     .navbar-toggler{
         align-self:center}
     }
-    .navbar-nav .nav-link.active{
-        font-weight:700;
-        border-bottom:2px solid #0b1846
+    .navbar-nav .nav-link.active {
+    font-weight: 700;
+    position: relative;
     }
+    
+    .navbar-nav .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 2px;
+        background-color: #0b1846;
+        border-radius: 2px;
+    }
+
     .navbar-nav .nav-link:hover{opacity:.8}
     .profile-wrapper {
         overflow: visible;
