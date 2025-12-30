@@ -131,7 +131,7 @@
 
     @media (max-width: 991px) {
     .navbar-collapse.show {
-        overflow-x: hidden;
+        overflow-x: visible;
     }
 
     .points-display {
