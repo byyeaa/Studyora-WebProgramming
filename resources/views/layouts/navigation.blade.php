@@ -126,13 +126,15 @@
     .navbar-toggler{
         align-self:center}
     }
-    .navbar-nav .nav-link.active {
-    font-weight: 700;
-    position: relative;
-    }
     
-    .navbar-nav .nav-link.active::after {
-        width: 30%; 
+   .navbar-nav .nav-link {
+        display: inline-block;
+    }
+
+    .navbar-nav .nav-link.active {
+        font-weight: 700;
+        border-bottom: 2px solid #0b1846;
+        padding-bottom: 4px;
     }
 
     .navbar-nav .nav-link:hover{opacity:.8}
